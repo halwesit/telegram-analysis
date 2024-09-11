@@ -4,7 +4,21 @@ function extractNames(data) {
   return data
     .map((item) => {
       if (item.user) {
-        return ["id:" + item.id, "name: " + item.user]
+        return [
+          "id:" + item.id,
+          "name: " + item.user,
+          "name: " + item.first_name,
+          item.last_name,
+        ]
+          .filter(Boolean)
+          .join(" ");
+      } else if (item.phone) {
+        return [
+          "id:" + item.id,
+          "phone: " + item.phone,
+          "name: " + item.first_name,
+          item.last_name,
+        ]
           .filter(Boolean)
           .join(" ");
       } else {
