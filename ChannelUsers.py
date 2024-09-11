@@ -1,75 +1,138 @@
 import configparser
-import json
+
 import asyncio
+import json
+import logging
+import os
+from typing import List, Dict, Any, Optional
 
 from telethon import TelegramClient
-from telethon.errors import SessionPasswordNeededError
+from telethon.errors import SessionPasswordNeededError, FloodWaitError, ChatAdminRequiredError
 from telethon.tl.functions.channels import GetParticipantsRequest
-from telethon.tl.types import ChannelParticipantsSearch
-from telethon.tl.types import (
-    PeerChannel
-)
+from telethon.tl.types import ChannelParticipantsSearch, InputPeerChannel, User
 
-# Reading Configs
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+# Load environment variables
 config = configparser.ConfigParser()
 config.read("config.ini")
+class TelegramScraper:
+    def __init__(self):
 
 # Setting configuration values
-api_id = config['Telegram']['api_id']
-api_hash = config['Telegram']['api_hash']
+        self.api_id = config['Telegram']['api_id']
+        self.api_hash = config['Telegram']['api_hash']
 
-api_hash = str(api_hash)
+        self.api_hash = str(self.api_hash)
 
-phone = config['Telegram']['phone']
-username = config['Telegram']['username']
+        self.phone = config['Telegram']['phone']
+        self.username = config['Telegram']['username']
+        self.client: Optional[TelegramClient] = None
 
-# Create the client and connect
-client = TelegramClient(username, api_id, api_hash)
+    async def initialize(self):
+        if not all([self.api_id, self.api_hash, self.phone, self.username]):
+            raise ValueError("Missing environment variables. Please set TELEGRAM_API_ID, TELEGRAM_API_HASH, TELEGRAM_PHONE, and TELEGRAM_USERNAME.")
+        
+        self.client = TelegramClient(self.username, self.api_id, self.api_hash)
+        await self.client.start()
+        logger.info("Client Created")
 
-async def main(phone):
-    await client.start()
-    print("Client Created")
-    # Ensure you're authorized
-    if await client.is_user_authorized() == False:
-        await client.send_code_request(phone)
+        if not await self.client.is_user_authorized():
+            await self.client.send_code_request(self.phone)
+            try:
+                await self.client.sign_in(self.phone, input('Enter the code: '))
+            except SessionPasswordNeededError:
+                await self.client.sign_in(password=input('Password: '))
+
+        me = await self.client.get_me()
+        logger.info(f"Successfully signed in as {me.username}")
+
+    async def get_all_participants(self, channel: InputPeerChannel) -> List[User]:
+        all_participants = []
+        offset = 0
+        limit = 200
+        max_retries = 5
+        retry_delay = 30  # seconds
+
+        while True:
+            try:
+                participants = await self.client(GetParticipantsRequest(
+                    channel, ChannelParticipantsSearch(''), offset, limit,
+                    hash=0
+                ))
+                if not participants.users:
+                    break
+                all_participants.extend(participants.users)
+                offset += len(participants.users)
+                logger.info(f"Retrieved {len(all_participants)} participants so far.")
+                
+                if len(participants.users) < limit:
+                    # We've reached the end of the list
+                    break
+                
+                await asyncio.sleep(1)  # Respect rate limits
+            except FloodWaitError as e:
+                logger.warning(f"Hit rate limit. Waiting for {e.seconds} seconds.")
+                await asyncio.sleep(e.seconds)
+            except ChatAdminRequiredError:
+                logger.error("Admin rights are required to fetch all participants.")
+                break
+            except Exception as e:
+                logger.error(f"Error retrieving participants: {e}")
+                if max_retries > 0:
+                    logger.info(f"Retrying in {retry_delay} seconds... ({max_retries} retries left)")
+                    await asyncio.sleep(retry_delay)
+                    max_retries -= 1
+                else:
+                    logger.error("Max retries reached. Stopping participant retrieval.")
+                    break
+
+        return all_participants
+
+    @staticmethod
+    def participant_to_dict(participant: User) -> Dict[str, Any]:
+        return {
+            "id": participant.id,
+            "first_name": getattr(participant, 'first_name', None),
+            "last_name": getattr(participant, 'last_name', None),
+            "username": getattr(participant, 'username', None),
+            "phone": getattr(participant, 'phone', None),
+            "is_bot": getattr(participant, 'bot', False)
+        }
+
+    async def scrape_channel(self, channel_input: str):
         try:
-            await client.sign_in(phone, input('Enter the code: '))
-        except SessionPasswordNeededError:
-            await client.sign_in(password=input('Password: '))
+            if channel_input.isdigit():
+                entity = InputPeerChannel(int(channel_input), 0)
+            else:
+                entity = channel_input
 
-    me = await client.get_me()
+            channel = await self.client.get_entity(entity)
+        except ValueError as e:
+            logger.error(f"Invalid input: {e}")
+            return
 
-    user_input_channel = input("enter entity(telegram URL or entity id):")
+        all_participants = await self.get_all_participants(channel)
+        all_user_details = [self.participant_to_dict(participant) for participant in all_participants]
 
-    if user_input_channel.isdigit():
-        entity = PeerChannel(int(user_input_channel))
-    else:
-        entity = user_input_channel
+        with open('user_data.json', 'w') as outfile:
+            json.dump(all_user_details, outfile, indent=2)
 
-    my_channel = await client.get_entity(entity)
+        logger.info(f"Scraped {len(all_user_details)} participants. Data saved to user_data.json")
 
-    offset = 0
-    limit = 100
-    all_participants = []
+        # Print additional information about the channel
+        logger.info(f"Channel ID: {channel.id}")
+        logger.info(f"Channel Title: {channel.title}")
+        logger.info(f"Channel Username: {channel.username}")
+        logger.info(f"Channel Participants Count (from channel info): {channel.participants_count}")
 
-    while True:
-        participants = await client(GetParticipantsRequest(
-            my_channel, ChannelParticipantsSearch(''), offset, limit,
-            hash=0
-        ))
-        if not participants.users:
-            break
-        all_participants.extend(participants.users)
-        offset += len(participants.users)
+async def main():
+    scraper = TelegramScraper()
+    await scraper.initialize()
 
-    all_user_details = []
-    for participant in all_participants:
-        all_user_details.append(
-            {"id": participant.id, "first_name": participant.first_name, "last_name": participant.last_name,
-             "user": participant.username, "phone": participant.phone, "is_bot": participant.bot})
+    channel_input = input("Enter entity (Telegram URL or entity ID): ")
+    await scraper.scrape_channel(channel_input)
 
-    with open('user_data.json', 'w') as outfile:
-        json.dump(all_user_details, outfile)
-
-with client:
-    client.loop.run_until_complete(main(phone))
+if __name__ == "__main__":
+    asyncio.run(main())
