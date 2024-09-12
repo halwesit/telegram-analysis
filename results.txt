@@ -1,3 +1,5 @@
+id:7495930106 phone: 9647738721520 name: . .
+id:226906926 phone: 9647502259735 name: Halwest Manguri
 id:1477229469 name: Arazw Abubakr
 id:1960813199 name: HAMA
 id:408677719 name: Hewr Soran
@@ -108,44 +110,44 @@ id:1892298820 name: Noshy A Naby
 id:773641754 name: Baran_Ziwa
 id:1337730260 name: Kaywan Sarkar
 id:1427665613 name: 07501066310
-id:754732650 phone: 9647501119488 name: kak faqe
-id:745675164 phone: 9647512018343 name: Othman
-id:739883169 phone: 9647501152354 name: Kak Saman
-id:727635702 phone: 79969298763 name: Karwan
-id:719409740 phone: 9647725330755 name: Karwan
-id:716204924 phone: 9647501699569 name: M ayoub
-id:705457030 phone: 9647504619162 name: Mahdi hamza
-id:640884414 name: kwazhyan
-id:611199601 phone: 9647503347536 name: M Lina
-id:609647557 phone: 9647501642869 name: Jumha Amin
-id:607223177 phone: 9647507797875 name: Kosret Hamashl
-id:597620059 phone: 9647503631175 name: Muhammad Xalid
-id:580666092 phone: 9647508903064 name: Muhammad Mahmud Afarin
-id:568681793 phone: 9647508524712 name: Kak Mhamad
-id:562987453 phone: 9647701505094 name: Mukryan
-id:557932485 phone: 9647503700301 name: kaka balen
-id:546300107 phone: 9647502212820 name: Kosar Ahmed Watman
-id:536521014 phone: 9647501928849 name: Mohammedp
-id:495385364 phone: 989184571552 name: Kak Erfan Mahmoodi
-id:494480640 phone: 9647701573529 name: Kak Luqman IT
-id:484185314 phone: 9647501143793 name: Kak Saman
-id:463414782 phone: 9647503493404 name: M. xalid soz lab
-id:458722778 phone: 9647500699501 name: Muhammad Sha3ir
-id:455657702 phone: 989039615861 name: Mohammed Degulan
-id:449549341 phone: 9647501596676 name: M Talib
-id:440529035 phone: 9647501568760 name: Kak braim
-id:378130923 phone: 9647502469954 name: Kamaran
-id:366682762 phone: 9647501026353 name: Krmanj
-id:356182810 phone: 9647501470216 name: M Araz Paiwamdiakan
-id:351376853 phone: 9647701571303 name: M Hawar
-id:340013380 phone: 9647502659191 name: paywandiakan
-id:312183111 phone: 9647715231156 name: Mohammed Debyen
-id:255566110 phone: 9647704943842 name: master card
-id:216579321 phone: 9647501053185 name: KakShwan
-id:167857212 phone: 9647502210695 name: Mamosta kawa
-id:155901515 phone: 9647701553046 name: parawgay sonya
-id:23444550 phone: 9647731855858 name: Kodo IT Security
-id:94828379 phone: 9647502327010 name: M. Hamid
+id:754732650 name: فقێ
+id:745675164 name: Oth Man
+id:739883169 name: Saman Xdr
+id:727635702 name: Karwan Raza
+id:719409740 name: A
+id:716204924 name: Ayub Akoi
+id:705457030 name: Dr.Mahdi hamza
+id:640884414 name: Sazgr Husain
+id:611199601 name: Lina Omer
+id:609647557 name: Jumaa Amin
+id:607223177 name: Kosret Hamashl
+id:597620059 name: Muhamad Khalid
+id:580666092 name: محمد محمود
+id:568681793 name: adam mahamad🦴
+id:562987453 name: Mukryan Company
+id:557932485 phone: 9647503700301 name: Balen Saman
+id:546300107 name: hi
+id:536521014 phone: 9647501928849 name: Mohammed Rasul
+id:495385364 name: E . M
+id:494480640 phone: 9647701573529 name: L M
+id:484185314 name: بروسك
+id:463414782 name: Khalid Kh
+id:458722778 name: Muhammad Rasul
+id:455657702 name: Mohamad
+id:449549341 name: Talib Hassan
+id:440529035 name: وةستابرايم وةستا برايم
+id:378130923 name: Kamaran Abdulrahman
+id:366682762 name: krmanj esmael
+id:356182810 name: Araz Mohammed
+id:351376853 name: H Y
+id:340013380 name: University of Raparin (Relations)
+id:312183111 name: Muhammed Dubayan
+id:255566110 phone: 9647704943842 name: IMTB CSC
+id:216579321 name: Shwan Ahmad
+id:167857212 name: Rawa Law
+id:155901515 phone: 9647701553046 name: Jalal khalla
+id:23444550 phone: 9647731855858 name: kodo net
+id:94828379 name: ژمێر سۆفت
 id:7496536778 name: Re din
 id:7382505844 name: Hero
 id:1017213617 name: محمد رسول
@@ -173,28 +175,27 @@ id:623815261 name: Hezha Xoshnaw
 id:6527688323 name: عومەر سوفیانی
 id:5788758505 name: Rebaz Sabah
 id:5080627532 name: ♥️
-id:7325219445 phone: 9647703678138 name: Abdulla Haji
-id:7090165978 phone: 9647702169346 name: .احمدارحمان
-id:7061371097 phone: 9647824846722 name: Bajy Salma
-id:6939290054 phone: 9647701230810 name: Baba gyan
-id:6839978416 phone: 9647500685318 name: 07500685318
-id:6684704582 phone: 966593310110 name: Anud
-id:6457689980 phone: 9647503541510 name: Akar Gaz Frosh
-id:6424926323 phone: 9647501648394 name: ‎ جهاد عبدالکریم فارس ‎
-id:6260921571 phone: 9647701529114 name: 0770 152 9114
-id:6163500546 phone: 9647503229838 name: 07503229838
-id:6107979465 phone: 9647501511077 name: Abdurahman Dawajin
-id:6107325710 phone: 9647510513917 name: 07510513917
-id:6081186778 phone: 9647505621840 name: bafrin muhammad
-id:5963319997 phone: 9647501976004 name: Avan
-id:5939936275 phone: 9647501277797 name: Ako IT
-id:5927643889 phone: 9647725317225 name: 7ama arbat kimya
-id:5720055629 phone: 9647501144727 name: 07501144727
+id:7325219445 name: Abdulla haji
+id:7090165978 name: Joker
+id:7061371097 name: يونس الدليمي
+id:6939290054 name: amin sangari
+id:6839978416 name: Abdulla Sleman
+id:6684704582 name: Rahim Timimy
+id:6457689980 name: Akar
+id:6424926323 name: Jihad Fars
+id:6260921571 name: Nawzad Rostam
+id:6163500546 name: Ahmad Abdullrahamn
+id:6107979465 name: عبدالرحمن عبدالله
+id:6107325710 name: Osman Khder
+id:6081186778 name: Bafrin
+id:5963319997 name: 🪬
+id:5939936275 phone: 9647501277797 name: Ako m
+id:5927643889 name: kamaran Aziz
+id:5720055629 name: Kurda
 id:5696595858 name: Ano
-id:5659496243 phone: 9647719892910 name: Aya
-id:5652631134 phone: 9647501325087 name: Baji Hawar
-id:5464678026 phone: 9647512483864 name: Baji Gyaband
-id:5395107416 phone: 9647511985743 name: ‏ Hakar Harem ‏
-id:5164388942 phone: 9647511766036 name: ‎ شایستە ئەحمەد عبدوڵا ‎
-id:5163129011 phone: 9647501312268 name: 🌸 Habibakam 🌸
-id:5141869257 phone: 9647501646802 name: 🌸ASHNA🌸
+id:5659496243 name: Bayan
+id:5652631134 name: Hawar Rasul
+id:5464678026 name: Gyaband Haji
+id:5395107416 name: Harem Khdir Omer
+id:5164388942 name: 5
+id:5163129011 phone: 9647501312268 name: Habiba Ahmad
